@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState<User | null>(null)
   const [error, setError] = useState(null)
-  const [initialLoading, setInitialLoading] = useEffect(true)
+  const [initialLoading, setInitialLoading] = useState(true)
   const router = useRouter()
 
   useEffect(

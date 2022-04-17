@@ -25,4 +25,3 @@ const auth = getAuth()
 
 export default app
 export { auth, db }
-const analytics = getAnalytics(app)
