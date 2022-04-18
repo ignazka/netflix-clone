@@ -7,7 +7,7 @@ import {
 } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { auth } from '../firebase'
+import { auth } from '../lib/firebase'
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setLoading(false)
         } else {
           setUser(null)
-          setLoading(true)
+          setLoading(false)
           router.push('/login')
         }
 
