@@ -12,6 +12,7 @@ import Modal from '../components/Modal'
 import Plans from '../components/Plans'
 import payments from '../lib/stripe'
 import { getProducts, Product } from '@stripe/firestore-stripe-payments'
+import useSubscription from '../hooks/useSubscription'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -37,9 +38,11 @@ const Home = ({
   documentaries,
   products,
 }: Props) => {
-  const { loading } = useAuth()
+  const { loading, user } = useAuth()
+  const subscription = useSubscription(user)
   const showModal = useRecoilValue(modalState)
-  const subscription = false
+
+  console.log(subscription)
 
   // if (loading || subscription === null) return null
   if (!subscription) return <Plans products={products} />
