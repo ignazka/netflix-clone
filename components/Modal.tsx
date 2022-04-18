@@ -8,16 +8,18 @@ import {
   VolumeOffIcon,
   VolumeUpIcon,
 } from '@heroicons/react/outline'
+import { FaPlay, FaPause } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
 import { Element, Genre } from '../typings'
 import ReactPlayer from 'react-player/lazy'
-import { FaPlay } from 'react-icons/fa'
 function Modal() {
   const [showModal, setShowModal] = useRecoilState(modalState)
   const [movie, setMovie] = useRecoilState(movieState)
   const [trailer, setTrailer] = useState()
   const [genres, setGenres] = useState<Genre[]>()
   const [muted, setMuted] = useState(false)
+  const [playing, setPlaying] = useState(false)
+
   const handleClose = () => {
     setShowModal(false)
   }
@@ -47,7 +49,7 @@ function Modal() {
   }, [movie])
   return (
     <MuiModal
-      className="roundedn-md fixed !top-7 left-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll scrollbar-hide"
+      className="fixed !top-7 right-0 left-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"
       open={showModal}
       onClose={handleClose}
     >
@@ -64,36 +66,44 @@ function Modal() {
             height="100%"
             width="100%"
             style={{ position: 'absolute', top: '0', left: '0' }}
-            playing
+            playing={playing}
             muted={muted}
           />
         </div>
-        <div className="absolute bottom-10 flex w-full items-center justify-between p-5">
+        <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
           <div className="flex space-x-2">
-            <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
-              {' '}
-              <FaPlay className="h-7 w-7 text-black" />
-              Play
+            <button
+              onClick={() => setPlaying(!playing)}
+              className="flex w-[150px] items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
+            >
+              {!playing ? (
+                <>
+                  <FaPlay className="h-6 w-6 text-black " />
+                  Play
+                </>
+              ) : (
+                <>
+                  <FaPause className="h-6 w-6 text-black " />
+                  Pause
+                </>
+              )}
             </button>
-            <button className="modalButton h-7 w-7">
-              <PlusIcon />
+            <button className="modalButton">
+              <PlusIcon className="h-7 w-7" />
             </button>
-            <button className="modalButton h-7 w-7">
-              <ThumbUpIcon />
+            <button className="modalButton">
+              <ThumbUpIcon className="h-7 w-7" />
             </button>
           </div>
-          <button
-            className="modalButton h-7 w-7"
-            onClick={() => setMuted(!muted)}
-          >
+          <button onClick={() => setMuted(!muted)} className="modalButton">
             {muted ? (
-              <VolumeUpIcon className="h-6 w-6" />
+              <VolumeUpIcon className="h-7 w-7" />
             ) : (
-              <VolumeOffIcon className="h-6 w-6" />
+              <VolumeOffIcon className="h-7 w-7" />
             )}
           </button>
         </div>
-        <div>
+        <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
           <div className="space-y-6 text-lg">
             <div className="flex items-center space-x-2 text-sm">
               <p className="font-semibold text-green-400">
@@ -106,12 +116,20 @@ function Modal() {
                 HD
               </div>
             </div>
-            <div className="w-5/6">
-              <p>{movie?.overview}</p>
+            <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row">
+              <p className="w-5/6">{movie?.overview}</p>
               <div className="flex flex-col space-y-3 text-sm">
                 <div>
-                  <span className="text-[gray]">Genres</span>
-                  {genres?.map((genres) => genres.name).join(', ')}
+                  <span className="text-[gray]">Genres: </span>
+                  {genres?.map((genre) => genre.name).join(', ')}
+                </div>
+                <div>
+                  <span className="text-[gray]">Original Language: </span>
+                  {movie?.original_language}
+                </div>
+                <div>
+                  <span className="text-[gray]">Total Votes: </span>
+                  {movie?.vote_count}
                 </div>
               </div>
             </div>
