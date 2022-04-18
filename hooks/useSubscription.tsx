@@ -22,7 +22,7 @@ function useSubscription(user: User | null) {
     })
   }, [user])
 
-  return <div>useSubscription</div>
+  return subscription
 }
 
 export default useSubscription
