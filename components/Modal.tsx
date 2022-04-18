@@ -62,6 +62,8 @@ function Modal() {
         </button>
         <div className="relative pt-[56.25%]">
           <ReactPlayer
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
             url={`https://www.youtube.com/watch?v=${trailer}`}
             height="100%"
             width="100%"
@@ -69,11 +71,11 @@ function Modal() {
             playing={playing}
             muted={muted}
           />
-          <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
+          <div className="absolute bottom-[-2] flex w-full items-center justify-between px-10 pt-4">
             <div className="flex space-x-2">
               <button
                 onClick={() => setPlaying(!playing)}
-                className="flex w-[150px] items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
+                className="w-100% flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
               >
                 {!playing ? (
                   <>
@@ -104,7 +106,7 @@ function Modal() {
           </div>
         </div>
 
-        <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
+        <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8 pt-24">
           <div className="space-y-6 text-lg">
             <div className="flex items-center space-x-2 text-sm">
               <p className="font-semibold text-green-400">
