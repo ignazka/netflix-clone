@@ -41,14 +41,13 @@ function Header() {
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="h-6 w-6" />
         {/* <Link href="/login"> */}
-
-        <img
-          onClick={logout}
-          src="https://rb.gy/g1pwyx"
-          alt=""
-          className="cursor-pointer rounded"
-        />
-        {/* </Link> */}
+        <Link href="/account">
+          <img
+            src="https://rb.gy/g1pwyx"
+            alt=""
+            className="cursor-pointer rounded"
+          />
+        </Link>
       </div>
     </header>
   )
