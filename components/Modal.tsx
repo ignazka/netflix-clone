@@ -97,7 +97,7 @@ function Modal() {
               </button>
             </div>
             <button onClick={() => setMuted(!muted)} className="modalButton">
-              {muted ? (
+              {!muted ? (
                 <VolumeUpIcon className="h-7 w-7" />
               ) : (
                 <VolumeOffIcon className="h-7 w-7" />
