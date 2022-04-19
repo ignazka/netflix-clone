@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setLoading(false)
         } else {
           setUser(null)
-          setLoading(false)
+          setLoading(true)
           router.push('/login')
         }
 
@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       logout,
       error,
     }),
-    [user, loading]
+    [user, loading, error]
   )
 
   return (
